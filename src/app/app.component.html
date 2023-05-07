@@ -8,7 +8,13 @@
             <h2>Manage Servers</h2>
           </div>
           <div class="col-sm-6">
-            <button type="button" class="btn btn-primary">Print Report</button>
+            <button
+              (click)="printReport()"
+              type="button"
+              class="btn btn-primary"
+            >
+              Print Report
+            </button>
 
             <a
               href="#addEmployeeModal"
@@ -21,6 +27,7 @@
 
             <span>
               <select
+                (ngModelChange)="filterServers($event)"
                 name="status"
                 ngModel="ALL"
                 class="btn btn-info"
@@ -114,7 +121,11 @@
                   </a>
                 </td>
                 <td>
-                  <a class="delete" data-toggle="modal" style="cursor: pointer"
+                  <a
+                    (click)="deleteServer(server)"
+                    class="delete"
+                    data-toggle="modal"
+                    style="cursor: pointer"
                     ><i
                       class="material-icons"
                       data-toggle="tooltip"
@@ -141,7 +152,7 @@
 <div id="addEmployeeModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+      <form #serverForm="ngForm" (ngSubmit)="saveServer(serverForm)">
         <div class="modal-header">
           <h4 class="modal-title">Add Server</h4>
           <button
@@ -223,10 +234,14 @@
           >
             Cancel
           </button>
-          <button type="submit" class="btn btn-success">
-            <i class="fas fa-spinner fa-spin"></i>
-            <span>Saving...</span>
-            <span>Add</span>
+          <button
+            type="submit"
+            [disabled]="serverForm.invalid || (isLoading$ | async)"
+            class="btn btn-success"
+          >
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
           </button>
         </div>
       </form>

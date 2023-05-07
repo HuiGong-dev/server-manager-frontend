@@ -17,7 +17,7 @@
             </button>
 
             <a
-              href="#addEmployeeModal"
+              href="#addServerModal"
               class="btn btn-success"
               data-toggle="modal"
             >
@@ -61,8 +61,8 @@
                 <th>Memory</th>
                 <th>Type</th>
                 <th>Status</th>
-                <th>Ping</th>
-                <th>Actions</th>
+                <th>Toggle</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody
@@ -149,7 +149,7 @@
 </div>
 
 <!-- Add server Modal HTML -->
-<div id="addEmployeeModal" class="modal fade">
+<div id="addServerModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <form #serverForm="ngForm" (ngSubmit)="saveServer(serverForm)">
